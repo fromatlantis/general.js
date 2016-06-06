@@ -1,0 +1,29 @@
+{
+	"devPath":"public",
+    "buildPath":"bin/assets",
+    "publicPath":"/wechat/v4.0/",
+    "debug":"false",
+    "online":false,
+    "testServer":{
+    	"sftp":{
+    		"host": "123.57.82.83",
+            "remotePath": "/opt/www/exj_managerv2/wechat/v4.0",
+            "user": "root",
+            "pass": "password"
+    	},
+    	"wx":{
+    		"appId":"wxda1ad46a30222ae2"
+    	}
+    },
+    "onServer":{
+    	"sftp":{
+    		"host": "123.57.26.130",
+            "remotePath": "/opt/www/exj_managerv2/wechat/v4.0",
+            "user": "root",
+            "pass": "password"
+    	},
+    	"wx":{
+    		"appId":"wx9e60458de7e99750"
+    	}
+    }
+}
