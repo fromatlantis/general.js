@@ -12,6 +12,17 @@ var app = express();
 
 var config = require('./config.json');
 
+//热部署，部署到线上时必须gulp pack重新打包
+var webpack = require('webpack');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var webpackConfig = require('./webpack.config');
+var compiler = webpack(webpackConfig);
+// 为使用nodejs做服务器配置webpack-dev-middleware
+// 如果需要浏览器自动刷新需要webpack-dev-server中间件
+app.use(webpackDevMiddleware(compiler,webpackConfig.devServer));
+ // 为实现HMR配置webpack-hot-middleware
+app.use(require("webpack-hot-middleware")(compiler));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -60,6 +71,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
