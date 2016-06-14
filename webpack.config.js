@@ -51,9 +51,10 @@ var plugins =function() {
             filename: filename + '.html'
         }
         if(filename in entries) {
-            conf.inject = 'body'
-            conf.chunks = ['general','common', filename],
-            conf.chunksSortMode='dependency'//根据依赖排序
+            conf.title = config.title[filename];
+            conf.inject = 'body';
+            conf.chunks = ['general','common', filename];
+            conf.chunksSortMode='dependency';//根据依赖排序
         }
         //if(/b|c/.test(filename)) conf.chunks.splice(2, 0, 'common-b-c')
         r.push(new HtmlWebpackPlugin(conf))
@@ -101,7 +102,7 @@ if(debug) {
 // 为实现webpack-hot-middleware做相关配置
 var entry=Object.assign({
         // 用到什么公共lib（例如React.js），就把它加进vender去，目的是将公用库单独提取打包
-        'general': ['zepto']
+        'general': ['zepto','underscore']
     },entries);
 if(debug){
     for (var key of Object.keys(entry)) {
@@ -146,7 +147,9 @@ module.exports = {
             },
             {test: /\.css$/, loader: cssLoader},
             {test: /\.scss$/, loader: sassLoader},
-            { test: /\.html$/, loader: 'html-loader' }
+            {test: /\.(tmpl|html)$/, loader: 'html-loader' },
+            //{test: /\.jade$/, loader: 'jade-html-loader' }
+            //{ test: /\.html$/, loader: 'html-loader' } //html-loader图片会被打包处理，注释掉的话需要将图片文件手动放入assets目录下
         ]
     },
     devServer: {

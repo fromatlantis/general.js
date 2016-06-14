@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // express.static 可以方便地托管静态文件
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 app.use('/wechat/v4.0', express.static(config.buildPath));//虚拟目录访问
 
 app.use('/', routes);
